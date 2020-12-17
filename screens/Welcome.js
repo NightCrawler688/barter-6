@@ -21,7 +21,7 @@ export default class Welcome extends React.Component{
     userLogin=(emailId,password)=>{
         firebase.auth().signInWithEmailAndPassword(emailId,password)
         .then(()=>{
-            return Alert.alert('User has been succesfully logined')
+          this.props.navigation.navigate('Exchange');
                 
         })
         .catch((error)=>{
