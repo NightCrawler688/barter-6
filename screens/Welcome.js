@@ -18,6 +18,30 @@ export default class Welcome extends React.Component{
             confirmPassword:''
         }
     }
+    createUniqueId(){
+      return Math.random().toString(36).substring(7)
+    }
+    addRequest=(bookName,reasonToRequest)=>{
+        var userId = this.state.userId;
+        var randomRequestId = this.createUniqueId();
+        db.collection('requestedBooks').add({
+            userId:userId,
+            bookName:bookName,
+            reasonToRequest:reasonToRequest,
+            requestId:randomRequestId
+        })
+        this.setState({
+          emailId:'',
+          password:'',
+          isModalVisible:false,
+          firstName:'',
+          lastName:'',
+          address:'',
+          contact:'',
+          confirmPassword:''
+        })
+        return Alert.alert('Book requested')
+    }
     userLogin=(emailId,password)=>{
         firebase.auth().signInWithEmailAndPassword(emailId,password)
         .then(()=>{

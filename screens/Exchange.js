@@ -15,6 +15,24 @@ export default class ExchangeScreen extends React.Component{
             userId:firebase.auth().currentUser.email
         }
     }
+    createUniqueId(){
+        return Math.random().toString(36).substring(7)
+      }
+      addRequest=(bookName,reasonToRequest)=>{
+          var userId = this.state.userId;
+          var randomRequestId = this.createUniqueId();
+          db.collection('requestedBooks').add({
+              userId:userId,
+              bookName:bookName,
+              reasonToRequest:reasonToRequest,
+              requestId:randomRequestId
+          })
+          this.setState({
+              bookName:'',
+              reasonToRequest:''
+          })
+          return Alert.alert('Book requested')
+      }
     render() {
         return(
             <View style = {{flex:1}}>
@@ -31,7 +49,7 @@ export default class ExchangeScreen extends React.Component{
                     })
                    }}/>
                     <TouchableOpacity style = {styles.button} onPress = {()=>{
-
+                        this.addRequest(this.state.bookName,this.state.reasonToRequest)
                     }}>
                        <Text>
                            Exchange
