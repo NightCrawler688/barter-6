@@ -6,6 +6,8 @@ import WelcomeScreen from './screens/Welcome';
 import HomeScreen from './screens/Home';
 import ExchangeScreen from './screens/Exchange';
 console. disableYellowBox = true;
+import {AppTabNavigator} from './components/AppNavigator'
+import {AppDrawerNavigator} from './components/AppDrawerNavigator'
 
 export default class App extends React.Component{
   render(){
@@ -14,24 +16,8 @@ export default class App extends React.Component{
     )
   }
 }
-const AppTabNavigator = createBottomTabNavigator({
-  Exchange:{
-    screen:ExchangeScreen,
-    navigationOptions:{
-      tabBarIcon:<Image source = {require('./assets/request-list.png')} style = {{width:20,height:20}}/>,
-      tabBarLabel:'Exchange items'
-    }
-  },
-  Home:{
-    screen:HomeScreen,
-    navigationOptions:{
-      tabBarIcon:<Image source = {require('./assets/request-book.png')} style = {{width:20,height:20}}/>,
-      tabBarLabel:'Home'
-    }
-  }
-})
 const SwitchNavigator = createSwitchNavigator({
   WelcomeScreen:{screen:WelcomeScreen},
-  BottomTab:{screen:AppTabNavigator}
+  Drawer:{screen:AppDrawerNavigator}
 })
 const AppContainer = createAppContainer(SwitchNavigator)
